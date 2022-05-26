@@ -63,6 +63,7 @@ public class DoublyLinkedList
 		}
 		else if(size-1==position){
 			insertLast(nodeValue);
+			size++;
 		}
 		else{
 			for(int i=0;i<position;i++){
@@ -72,8 +73,9 @@ public class DoublyLinkedList
 			newNode=new Node(previousNode,nodeValue,currentNode);
 			previousNode.next=newNode;
 			currentNode.previous=newNode;
+			size++;
 		}
-	size++;
+	
 	}
 	
 	public void deleteFirst()
@@ -97,14 +99,23 @@ public class DoublyLinkedList
 	public void deleteAt(int position)
 	{
 		Node currentNode=head,previousNode,nextNode;
-		for(int i=0;i<position;i++){
-			currentNode=currentNode.next;
+		if(position==size-1){
+			deleteLast();
+		} 
+		else if(position==0){
+			deleteFirst();
 		}
-		previousNode=currentNode.previous;
-		nextNode=currentNode.next;
-		previousNode.next=nextNode;
-		nextNode.previous=previousNode;
-		size--;
+		else{
+			for(int i=0;i<position;i++){
+				currentNode=currentNode.next;
+			}
+				previousNode=currentNode.previous;
+				nextNode=currentNode.next;
+				previousNode.next=nextNode;
+				nextNode.previous=previousNode;
+				size--;
+			}
+		
 	}
 	
 	public void countNodes()
